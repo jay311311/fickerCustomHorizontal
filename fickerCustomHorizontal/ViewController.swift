@@ -14,11 +14,11 @@ class ViewController: UIViewController {
     let initNum = 3
     // 선택된 index
     var selectedNum = 3
-    
+
     lazy var pickerContainer = UIView().then {
         $0.clipsToBounds = true
     }
-    
+
     lazy var labelStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillProportionally
@@ -26,20 +26,20 @@ class ViewController: UIViewController {
         $0.spacing = 5.0
     }
     // uiPicker뷰를 horizontal처럼 보이기 위해 90도 회전
-    lazy var testPicker = UIPickerView().then{ $0.transform =  CGAffineTransform(rotationAngle: -90 * (.pi / 180))}
-    lazy var dividerTop = UIView().then{ $0.backgroundColor = .systemGray6 }
-    lazy var dividerBottom = UIView().then{ $0.backgroundColor = .systemGray6 }
-    
+    lazy var testPicker = UIPickerView().then { $0.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180)) }
+    lazy var dividerTop = UIView().then { $0.backgroundColor = .systemGray6 }
+    lazy var dividerBottom = UIView().then { $0.backgroundColor = .systemGray6 }
+
     lazy var questionTitle = UILabel().then { $0.text = "몇명을 초대할까요?" }
-    lazy var unitCount = UILabel().then {  $0.text = "명" }
+    lazy var unitCount = UILabel().then { $0.text = "명" }
     lazy var count = UILabel().then {
         $0.textColor = .systemPurple
         $0.font = .systemFont(ofSize: 25, weight: .bold)
         $0.text = testPickerList[initNum]
     }
-    
-    let testPickerList:[String] = [ "●", "●", "●", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
-    
+
+    let testPickerList: [String] = ["●", "●", "●", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -48,17 +48,17 @@ class ViewController: UIViewController {
         testPicker.delegate = self
         testPicker.selectRow(initNum, inComponent: 0, animated: false)
     }
-    
-    func setupLayout(){
+
+    func setupLayout() {
         self.view.addSubview(pickerContainer)
         self.view.addSubview(labelStackView)
-       
+
         pickerContainer.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom)
             $0.horizontalEdges.equalToSuperview().inset(10)
             $0.height.equalTo(50)
         }
-        
+
         pickerContainer.addSubview(testPicker)
         pickerContainer.addSubview(dividerTop)
         pickerContainer.addSubview(dividerBottom)
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         labelStackView.addArrangedSubview(questionTitle)
         labelStackView.addArrangedSubview(count)
         labelStackView.addArrangedSubview(unitCount)
-        
+
         labelStackView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(70)
@@ -90,36 +90,36 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate{
+extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return testPickerList.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
+
         // 투명한 회색 뷰 안보이게하기위함 : false로 변경시 picker뷰에서 선택 되었을때 보이는 뷰 안보이게함
         testPicker.subviews[1].isHidden = true
-        
+
         let pickerLabel = UILabel()
         pickerLabel.text = testPickerList[row]
         pickerLabel.textAlignment = NSTextAlignment.center
         // 90도 돌아간 uiPicker뷰의 Label을 -90도 돌려서 글자 예쁘게 보이게
-        pickerLabel.transform = CGAffineTransform(rotationAngle: 90  * (.pi/180))
+        pickerLabel.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
 
         if row == selectedNum {
             pickerLabel.font = .systemFont(ofSize: 30, weight: .bold)
             pickerLabel.textColor = UIColor.purple
-        }else{
+        } else {
             pickerLabel.font = .systemFont(ofSize: 28, weight: .medium)
             pickerLabel.textColor = UIColor.gray
         }
         return pickerLabel
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row >= initNum {
             selectedNum = row
@@ -133,7 +133,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate{
             testPicker.reloadComponent(component)
         }
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 65
     }

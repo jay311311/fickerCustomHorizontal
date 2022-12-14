@@ -15,6 +15,7 @@
 		673FBD5729480F7F00E68C66 /* fickerCustomHorizontalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673FBD5629480F7F00E68C66 /* fickerCustomHorizontalTests.swift */; };
 		673FBD6129480F7F00E68C66 /* fickerCustomHorizontalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673FBD6029480F7F00E68C66 /* fickerCustomHorizontalUITests.swift */; };
 		673FBD6329480F7F00E68C66 /* fickerCustomHorizontalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673FBD6229480F7F00E68C66 /* fickerCustomHorizontalUITestsLaunchTests.swift */; };
+		673FBD7029499DEF00E68C66 /* PickerCountainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673FBD6F29499DEF00E68C66 /* PickerCountainer.swift */; };
 		74F74578184F6C0CF2C6A6DB /* Pods_fickerCustomHorizontal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45A306854D570196CCF74AC7 /* Pods_fickerCustomHorizontal.framework */; };
 		D3FF50D1A717290E40552F98 /* Pods_fickerCustomHorizontalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527ACB0E99EE6FCC90AAFE5A /* Pods_fickerCustomHorizontalTests.framework */; };
 		EAF4DEA47DDCFD9CE044435E /* Pods_fickerCustomHorizontal_fickerCustomHorizontalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4180F6215C3232AA70CC0B44 /* Pods_fickerCustomHorizontal_fickerCustomHorizontalUITests.framework */; };
@@ -53,6 +54,7 @@
 		673FBD5C29480F7F00E68C66 /* fickerCustomHorizontalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fickerCustomHorizontalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		673FBD6029480F7F00E68C66 /* fickerCustomHorizontalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fickerCustomHorizontalUITests.swift; sourceTree = "<group>"; };
 		673FBD6229480F7F00E68C66 /* fickerCustomHorizontalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fickerCustomHorizontalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		673FBD6F29499DEF00E68C66 /* PickerCountainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCountainer.swift; sourceTree = "<group>"; };
 		98EEB7B963A19E7210DA1C95 /* Pods-fickerCustomHorizontal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fickerCustomHorizontal.release.xcconfig"; path = "Target Support Files/Pods-fickerCustomHorizontal/Pods-fickerCustomHorizontal.release.xcconfig"; sourceTree = "<group>"; };
 		99C170A85F278C80DF902F06 /* Pods-fickerCustomHorizontalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fickerCustomHorizontalTests.release.xcconfig"; path = "Target Support Files/Pods-fickerCustomHorizontalTests/Pods-fickerCustomHorizontalTests.release.xcconfig"; sourceTree = "<group>"; };
 		9EB87B8967DB6F19B064EEB8 /* Pods-fickerCustomHorizontal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fickerCustomHorizontal.debug.xcconfig"; path = "Target Support Files/Pods-fickerCustomHorizontal/Pods-fickerCustomHorizontal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				673FBD3F29480F7D00E68C66 /* AppDelegate.swift */,
 				673FBD4129480F7D00E68C66 /* SceneDelegate.swift */,
 				673FBD4329480F7D00E68C66 /* ViewController.swift */,
+				673FBD6F29499DEF00E68C66 /* PickerCountainer.swift */,
 				673FBD4829480F7F00E68C66 /* Assets.xcassets */,
 				673FBD4A29480F7F00E68C66 /* LaunchScreen.storyboard */,
 				673FBD4D29480F7F00E68C66 /* Info.plist */,
@@ -161,7 +164,6 @@
 				FD454052248BA2880EF35C85 /* Pods-fickerCustomHorizontalTests.debug.xcconfig */,
 				99C170A85F278C80DF902F06 /* Pods-fickerCustomHorizontalTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -406,6 +408,7 @@
 				673FBD4429480F7D00E68C66 /* ViewController.swift in Sources */,
 				673FBD4029480F7D00E68C66 /* AppDelegate.swift in Sources */,
 				673FBD4229480F7D00E68C66 /* SceneDelegate.swift in Sources */,
+				673FBD7029499DEF00E68C66 /* PickerCountainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
