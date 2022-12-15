@@ -6,6 +6,8 @@ target 'fickerCustomHorizontal' do
   use_frameworks!
     pod 'SnapKit', '~> 5.6.0'
     pod 'Then'
+    pod 'RxSwift', '6.5.0'
+    pod 'RxCocoa', '6.5.0'
   # Pods for fickerCustomHorizontal
 
   target 'fickerCustomHorizontalTests' do
