@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         $0.alignment = .center
         $0.spacing = 5.0
     }
-    lazy var pickerContainer = PickerCountainer(frame: .zero, dataList: testPickerList).then {
+    lazy var pickerContainer = HorizontalPicker(dataList: testPickerList, mainColor: .purple,sideColor: .lightGray).then {
         $0.clipsToBounds = true
     }
 

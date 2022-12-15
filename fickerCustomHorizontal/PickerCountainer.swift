@@ -11,22 +11,26 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class PickerCountainer: UIView {
+class HorizontalPicker: UIView {
     let indexRelay = PublishRelay<String>()
     // 1로 표시되기 위한 index
     let initNum = 3
     // 선택된 index
     var selectedNum = 3
-    var testPickerList: [String] = []
+    var testPickerList: [String]
+    var mainColor:UIColor
+    var sideColor:UIColor
     
     // uiPicker뷰를 horizontal처럼 보이기 위해 90도 회전
     lazy var testPicker = UIPickerView().then { $0.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180)) }
     lazy var dividerTop = UIView().then { $0.backgroundColor = .systemGray6 }
     lazy var dividerBottom = UIView().then { $0.backgroundColor = .systemGray6 }
     
-    init(frame: CGRect, dataList: [String]) {
-        super.init(frame: .zero)
+    init (dataList: [String],mainColor: UIColor,sideColor:UIColor) {
         self.testPickerList = dataList
+        self.mainColor = mainColor
+        self.sideColor = sideColor
+        super.init(frame: .zero)
         testPicker.dataSource = self
         testPicker.delegate = self
         setupLayout()
@@ -56,9 +60,11 @@ class PickerCountainer: UIView {
             $0.height.equalTo(1)
         }
     }
+    
+
 }
 
-extension PickerCountainer: UIPickerViewDataSource, UIPickerViewDelegate {
+extension HorizontalPicker: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -71,7 +77,7 @@ extension PickerCountainer: UIPickerViewDataSource, UIPickerViewDelegate {
         // 투명한 회색 뷰 안보이게하기위함 : false로 변경시 picker뷰에서 선택 되었을때 보이는 뷰 안보이게함
         testPicker.subviews[1].isHidden = true
         
-        let pickerLabel = UILabel()
+        let pickerLabel = CustomePickerLabel()
         pickerLabel.text = testPickerList[row]
         pickerLabel.textAlignment = NSTextAlignment.center
         // 90도 돌아간 uiPicker뷰의 Label을 -90도 돌려서 글자 예쁘게 보이게
@@ -79,10 +85,10 @@ extension PickerCountainer: UIPickerViewDataSource, UIPickerViewDelegate {
         
         if row == selectedNum {
             pickerLabel.font = .systemFont(ofSize: 30, weight: .bold)
-            pickerLabel.textColor = UIColor.purple
+            pickerLabel.getTextColor(color: mainColor, label: pickerLabel)
         } else {
             pickerLabel.font = .systemFont(ofSize: 28, weight: .medium)
-            pickerLabel.textColor = UIColor.gray
+            pickerLabel.getTextColor(color: sideColor, label: pickerLabel)
         }
         return pickerLabel
     }
