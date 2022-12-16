@@ -13,13 +13,13 @@ import RxSwift
 
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
-    // "1"로 표시되기 위한 index
-    let initNum = 3
+    // pickerView를 위한 데이터 세팅
+    let initNum = 3 // "1"이 맨처음에 보이기 위햔 index
     let pickerList: [String] = ["●", "●", "●", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
     let pickerMainText = pickerTextSetting(color: .purple, size: 30, weight: .bold)
     let pickerSideText = pickerTextSetting(color: .lightGray, size: 28, weight: .medium)
 
-    lazy var pickerContainer = HorizontalPicker(dataList: pickerList, mainTextSetting: pickerMainText, sideTextSetting: pickerSideText, initNum: initNum).then {
+    lazy var horizontalPicker = HorizontalPicker(dataList: pickerList, mainTextSetting: pickerMainText, sideTextSetting: pickerSideText, initNum: initNum).then {
         $0.clipsToBounds = true
     }
 
@@ -39,18 +39,17 @@ class ViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        self.view.backgroundColor = .white
         super.viewDidLoad()
         setupLayout()
         bindData()
-        pickerContainer.setupPickerView(initNum)
-        self.view.backgroundColor = .white
     }
 
     func setupLayout() {
         self.view.addSubview(labelStackView)
-        self.view.addSubview(pickerContainer)
+        self.view.addSubview(horizontalPicker)
 
-        pickerContainer.snp.makeConstraints {
+        horizontalPicker.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(50)
@@ -67,7 +66,7 @@ class ViewController: UIViewController {
     }
 
     func bindData() {
-        pickerContainer.indexRelay.subscribe(onNext: {
+        horizontalPicker.valueRelay.subscribe(onNext: {
             self.count.text = $0
         }).disposed(by: disposeBag)
     }

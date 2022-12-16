@@ -18,9 +18,9 @@ struct pickerTextSetting {
 }
 
 class HorizontalPicker: UIView {
-    let indexRelay = PublishRelay<String>()
+    let valueRelay = PublishRelay<String>()
 
-    // 선택된 index 초기화
+    // 초기 데이터 세팅을위한 변수
     var selectedNum: Int = 0
     var pickerList: [String]
     var mainTextSetting: pickerTextSetting
@@ -41,6 +41,7 @@ class HorizontalPicker: UIView {
         pickerView.dataSource = self
         pickerView.delegate = self
         setupLayout()
+        setupPickerView(initNum)
     }
 
     required init?(coder: NSCoder) {
@@ -48,6 +49,7 @@ class HorizontalPicker: UIView {
     }
 
     func setupPickerView(_ initNum: Int) {
+        // 초기 세팅 값 설정
         selectedNum = initNum
         pickerView.selectRow(initNum, inComponent: 0, animated: false)
     }
@@ -56,11 +58,10 @@ class HorizontalPicker: UIView {
         addSubview(pickerView)
         addSubview(dividerTop)
         addSubview(dividerBottom)
-        
+
         // UIPicker뷰를 90도 돌렸기때문에 width와 heigt의 역할이 바뀌었다고 생각하면됨
-        // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
         pickerView.snp.makeConstraints {
-            $0.height.equalTo(UIScreen.main.bounds.size.width * 2)
+            $0.height.equalTo(UIScreen.main.bounds.size.width * 2) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
             $0.center.equalToSuperview()
         }
         dividerTop.snp.makeConstraints {
@@ -84,21 +85,21 @@ extension HorizontalPicker: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        // 투명한 회색 뷰 안보이게하기위함 : false로 변경시 picker뷰에서 선택 되었을때 보이는 뷰 안보이게함
+        // picker뷰에서 선택 되었을때 보이는 (회색 투명)뷰 안보이게함
         pickerView.subviews[1].isHidden = true
 
         let pickerLabel = UILabel()
         pickerLabel.text = pickerList[row]
         pickerLabel.textAlignment = NSTextAlignment.center
-        
+
         // 90도 돌아간 uiPicker뷰의 Label을 -90도 돌려서 글자 예쁘게 보이게
         pickerLabel.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
 
         if row == selectedNum {
-            pickerLabel.font  = .systemFont(ofSize: mainTextSetting.size, weight: mainTextSetting.weight)
+            pickerLabel.font = .systemFont(ofSize: mainTextSetting.size, weight: mainTextSetting.weight)
             pickerLabel.textColor = mainTextSetting.color
         } else {
-            pickerLabel.font  = .systemFont(ofSize: sideTextSetting.size, weight: sideTextSetting.weight)
+            pickerLabel.font = .systemFont(ofSize: sideTextSetting.size, weight: sideTextSetting.weight)
             pickerLabel.textColor = sideTextSetting.color
         }
         return pickerLabel
@@ -107,11 +108,11 @@ extension HorizontalPicker: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedNum = row
         if row >= initNum {
-            indexRelay.accept(pickerList[row])
+            valueRelay.accept(pickerList[row])
             pickerView.reloadComponent(component)
         } else {
             print("최소 1명 이상 선택해야합니당~~")
-            indexRelay.accept("-")
+            valueRelay.accept("-")
             pickerView.reloadComponent(component)
         }
     }
