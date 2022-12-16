@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     let initNum = 3 // "1"이 맨처음에 보이기 위햔 index
     let pickerList: [String] = ["●", "●", "●", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
     let pickerMainText = pickerTextSetting(color: .purple, size: 30, weight: .bold)
-    let pickerSideText = pickerTextSetting(color: .lightGray, size: 28, weight: .medium)
+    let pickerSideText = pickerTextSetting()
 
-    lazy var horizontalPicker = HorizontalPicker(dataList: pickerList, mainTextSetting: pickerMainText, sideTextSetting: pickerSideText, initNum: initNum).then {
+    lazy var horizontalPicker = HorizontalPicker(dataList: pickerList, mainTextSetting: pickerMainText, initNum: initNum).then {
         $0.clipsToBounds = true
     }
 

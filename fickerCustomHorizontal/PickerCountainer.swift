@@ -12,9 +12,9 @@ import RxCocoa
 import RxSwift
 
 struct pickerTextSetting {
-    var color: UIColor
-    var size: CGFloat
-    var weight: UIFont.Weight
+    var color: UIColor = .lightGray
+    var size: CGFloat = 28
+    var weight: UIFont.Weight = .medium
 }
 
 class HorizontalPicker: UIView {
@@ -28,11 +28,13 @@ class HorizontalPicker: UIView {
     let initNum: Int
 
     // uiPicker뷰를 horizontal처럼 보이기 위해 90도 회전
-    lazy var pickerView = UIPickerView().then { $0.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180)) }
+    lazy var pickerView = UIPickerView().then {
+
+        $0.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180)) }
     lazy var dividerTop = UIView().then { $0.backgroundColor = .systemGray6 }
     lazy var dividerBottom = UIView().then { $0.backgroundColor = .systemGray6 }
 
-    init (dataList: [String], mainTextSetting: pickerTextSetting, sideTextSetting: pickerTextSetting, initNum: Int = 0) {
+    init (dataList: [String], mainTextSetting: pickerTextSetting, sideTextSetting: pickerTextSetting = pickerTextSetting(), initNum: Int = 0) {
         self.pickerList = dataList
         self.mainTextSetting = mainTextSetting
         self.sideTextSetting = sideTextSetting
@@ -61,7 +63,7 @@ class HorizontalPicker: UIView {
 
         // UIPicker뷰를 90도 돌렸기때문에 width와 heigt의 역할이 바뀌었다고 생각하면됨
         pickerView.snp.makeConstraints {
-            $0.height.equalTo(UIScreen.main.bounds.size.width * 2) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
+            $0.height.equalTo(UIScreen.main.bounds.size.width) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
             $0.center.equalToSuperview()
         }
         dividerTop.snp.makeConstraints {
