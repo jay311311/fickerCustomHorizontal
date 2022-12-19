@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         $0.spacing = 5.0
     }
 
+    lazy var tablePicker = CollectionPicker(pickerList: pickerList)
     lazy var questionTitle = UILabel().then { $0.text = "몇명을 초대할까요?" }
     lazy var unitCount = UILabel().then { $0.text = "명" }
     lazy var count = UILabel().then {
@@ -48,6 +49,7 @@ class ViewController: UIViewController {
     func setupLayout() {
         self.view.addSubview(labelStackView)
         self.view.addSubview(horizontalPicker)
+        self.view.addSubview(tablePicker)
 
         horizontalPicker.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom)
@@ -62,6 +64,15 @@ class ViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(70)
             $0.centerX.equalToSuperview()
+        }
+        
+        tablePicker.snp.makeConstraints {
+            $0.top.equalTo(horizontalPicker.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.width.equalTo(300)
+            $0.height.equalTo(60)
+
         }
     }
 

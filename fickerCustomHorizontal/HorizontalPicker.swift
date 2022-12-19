@@ -1,5 +1,5 @@
 //
-//  PickerCountainer.swift
+//  HorizontalPicker.swift
 //  fickerCustomHorizontal
 //
 //  Created by Jooeun Kim on 2022/12/14.
@@ -29,7 +29,7 @@ class HorizontalPicker: UIView {
 
     // uiPicker뷰를 horizontal처럼 보이기 위해 90도 회전
     lazy var pickerView = UIPickerView().then {
-
+        $0.layer.mask = nil
         $0.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180)) }
     lazy var dividerTop = UIView().then { $0.backgroundColor = .systemGray6 }
     lazy var dividerBottom = UIView().then { $0.backgroundColor = .systemGray6 }
@@ -63,7 +63,7 @@ class HorizontalPicker: UIView {
 
         // UIPicker뷰를 90도 돌렸기때문에 width와 heigt의 역할이 바뀌었다고 생각하면됨
         pickerView.snp.makeConstraints {
-            $0.height.equalTo(UIScreen.main.bounds.size.width) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
+            $0.height.equalTo(UIScreen.main.bounds.size.width * 2 ) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
             $0.center.equalToSuperview()
         }
         dividerTop.snp.makeConstraints {

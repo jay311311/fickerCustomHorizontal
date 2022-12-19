@@ -7,12 +7,14 @@ PODS:
   - RxSwift (6.5.0)
   - SnapKit (5.6.0)
   - Then (3.0.0)
+  - WheelPicker (1.0.1)
 
 DEPENDENCIES:
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
   - SnapKit (~> 5.6.0)
   - Then
+  - WheelPicker (~> 1.0)
 
 SPEC REPOS:
   trunk:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - Then
+    - WheelPicker
 
 SPEC CHECKSUMS:
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -28,7 +31,8 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  WheelPicker: 2eb2c5b9f2a79b22acaf5959c666a67bf9db9ed5
 
-PODFILE CHECKSUM: d237bf53a1a15741a3b57d79d67fb762d66c7219
+PODFILE CHECKSUM: 408bae194f5bcac6c49ce262743afa7374b93fb9
 
 COCOAPODS: 1.11.3

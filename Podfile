@@ -8,6 +8,7 @@ target 'fickerCustomHorizontal' do
     pod 'Then'
     pod 'RxSwift', '6.5.0'
     pod 'RxCocoa', '6.5.0'
+    pod 'WheelPicker', '~> 1.0'
   # Pods for fickerCustomHorizontal
 
   target 'fickerCustomHorizontalTests' do
