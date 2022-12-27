@@ -12,13 +12,19 @@ import RxCocoa
 import RxSwift
 import WheelPicker
 
-
 class CollectionPicker: UIView {
+    let valueRelay = PublishRelay<String>()
 
+    let initNum: Int
+    var mainTextSetting: pickerTextSetting
+    var sideTextSetting: pickerTextSetting
     let pickerList: [String]
 
-    init(pickerList: [String]) {
-        self.pickerList = pickerList
+    init(dataList: [String], mainTextSetting: pickerTextSetting, sideTextSetting: pickerTextSetting = pickerTextSetting(), initNum: Int = 0) {
+        self.pickerList = dataList
+        self.mainTextSetting = mainTextSetting
+        self.sideTextSetting = sideTextSetting
+        self.initNum = initNum
         super.init(frame: .zero)
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -29,18 +35,21 @@ class CollectionPicker: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     lazy var pickerView = WheelPicker().then {
-        $0.interitemSpacing = 25.0
+        $0.interitemSpacing = 28.0
         $0.style = .styleFlat
         $0.isMaskDisabled = true
         $0.scrollDirection = .horizontal
         $0.textColor = UIColor.systemGray5
-        $0.highlightedTextColor = UIColor.purple
-        $0.font = UIFont.systemFont(ofSize: 28, weight: .medium)
-        $0.highlightedFont = UIFont.systemFont(ofSize: 30, weight: .bold)
+        $0.highlightedTextColor = mainTextSetting.color
+        $0.font = UIFont.systemFont(ofSize: sideTextSetting.size, weight: sideTextSetting.weight)
+        $0.highlightedFont = UIFont.systemFont(ofSize: mainTextSetting.size, weight: mainTextSetting.weight)
     }
+    
     lazy var dividerTop = UIView().then { $0.backgroundColor = .systemGray6 }
     lazy var dividerBottom = UIView().then { $0.backgroundColor = .systemGray6 }
+    
     func setupLayout() {
         addSubview(pickerView)
         addSubview(dividerTop)
@@ -64,21 +73,23 @@ class CollectionPicker: UIView {
 
 extension CollectionPicker: WheelPickerDataSource, WheelPickerDelegate {
     func numberOfItems(_ wheelPicker: WheelPicker) -> Int {
-        print(pickerList.count)
-            return pickerList.count
+        return pickerList.count
     }
+    
     func titleFor(_ wheelPicker: WheelPicker, at index: Int) -> String {
         return pickerList[index]
     }
-    
+
     func wheelPicker(_ wheelPicker: WheelPicker, didSelectItemAt index: Int) {
-              print("\(pickerList[index])")
-      
+        if index >= 3 {
+            valueRelay.accept(pickerList[index])
+        } else {
+            print("최소 1명 이상 선택해야합니당~~")
+            valueRelay.accept("-")
+        }
     }
-    
+
     func wheelPicker(_ wheelPicker: WheelPicker, marginForItem index: Int) -> CGSize {
-        
-        return CGSize(width: 3.0 , height: 0.0)
+        return CGSize(width: 0.0, height: 0.0)
     }
-    
 }

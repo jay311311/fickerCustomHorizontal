@@ -63,7 +63,7 @@ class HorizontalPicker: UIView {
 
         // UIPicker뷰를 90도 돌렸기때문에 width와 heigt의 역할이 바뀌었다고 생각하면됨
         pickerView.snp.makeConstraints {
-            $0.height.equalTo(UIScreen.main.bounds.size.width * 2 ) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
+            $0.height.equalTo(UIScreen.main.bounds.size.width * 2) // UIPicker뷰의 wheel모양을 가리기위해 화면 면적보다 더 넒게 너비를 잡았다.
             $0.center.equalToSuperview()
         }
         dividerTop.snp.makeConstraints {
