@@ -13,6 +13,7 @@ import RxSwift
 
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
+    
     // pickerView를 위한 데이터 세팅
     let initNum = 3 // "1"이 맨처음에 보이기 위햔 index
     let pickerList: [String] = ["●", "●", "●", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
         $0.spacing = 5.0
     }
 
-    lazy var tablePicker = CollectionPicker(pickerList: pickerList)
+    lazy var colletionPicker = CollectionPicker(dataList: pickerList, mainTextSetting: pickerMainText, initNum: initNum)
     lazy var questionTitle = UILabel().then { $0.text = "몇명을 초대할까요?" }
     lazy var unitCount = UILabel().then { $0.text = "명" }
     lazy var count = UILabel().then {
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
     func setupLayout() {
         self.view.addSubview(labelStackView)
         self.view.addSubview(horizontalPicker)
-        self.view.addSubview(tablePicker)
+        self.view.addSubview(colletionPicker)
 
         horizontalPicker.snp.makeConstraints {
             $0.top.equalTo(labelStackView.snp.bottom)
@@ -65,19 +66,19 @@ class ViewController: UIViewController {
             $0.height.equalTo(70)
             $0.centerX.equalToSuperview()
         }
-        
-        tablePicker.snp.makeConstraints {
-            $0.top.equalTo(horizontalPicker.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-            $0.width.equalTo(300)
-            $0.height.equalTo(60)
 
+        colletionPicker.snp.makeConstraints {
+            $0.top.equalTo(horizontalPicker.snp.bottom).offset(30)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(60)
         }
     }
 
     func bindData() {
         horizontalPicker.valueRelay.subscribe(onNext: {
+            self.count.text = $0
+        }).disposed(by: disposeBag)
+        colletionPicker.valueRelay.subscribe(onNext: {
             self.count.text = $0
         }).disposed(by: disposeBag)
     }
